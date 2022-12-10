@@ -1,3 +1,3 @@
-- name: test for frontend
-  debug:
-    msg: frontend
+ - name: test for frontend
+   debug:
+     msg: frontend
