@@ -11,14 +11,14 @@
       
 - name: Download App Content And Extract it
   ansible.builtin.unarchive:
-      src: https://github.com/Bhakti-19/{{ COMPONENT }}/archive/refs/heads/main.zip
+      src: https://github.com/Bhakti-19/{{COMPONENT}}/archive/refs/heads/main.zip
       dest: "/tmp"
       remote_src: yes
 
 
 - name: Copy Extracted App Content to App Location
   ansible.builtin.copy:
-     src: /tmp/{{ COMPONENT }}-main/
-     dest: "{{ APP_LOC }}"
+     src: /tmp/{{COMPONENT}}-main/
+     dest: "{{ APP_LOC }}/"
      remote_src: yes
 
