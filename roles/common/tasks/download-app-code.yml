@@ -15,11 +15,12 @@
      state: absent
 
       
-- name: Download App Content And Extract It
+- name: Download App Content And Extract it
   ansible.builtin.unarchive:
     - src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
       dest: "/tmp"
       remote_src: yes
+
 
 - name: Copy Extracted App Content to App Location
   ansible.builtin.copy:
