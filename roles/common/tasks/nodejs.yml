@@ -1,4 +1,14 @@
-- name: Load NodeJS
+- name: Configure NodeJS Repos
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Install NodeJS
+  ansible.builtin.yum:
+     name: nodejs
+     state: installed
+
+- name: Include DownLoad APP_CODE Tasks from Common Role
   ansible.builtin.include_role:
     name: common
-    task_from: nodejs
+    tasks_from: download-app-code
+
+
