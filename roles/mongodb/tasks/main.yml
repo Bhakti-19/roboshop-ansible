@@ -22,3 +22,16 @@
     state: restarted
     enabled: yes
 
+- name: Download App Content And Extract it
+  ansible.builtin.unarchive:
+    src: https://github.com/Bhakti-19/{{COMPONENT}}/archive/refs/heads/main.zip
+    dest: "/tmp"
+    remote_src: yes
+
+- name: Load Scema
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/{{item}}.js"
+    idempotent: yes
+  loop:
+     - catalogue
+     - user

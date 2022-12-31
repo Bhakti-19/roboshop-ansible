@@ -10,6 +10,10 @@
           - {name: "param.dev.catalogue.MONGO", value: "true"}
           - {name: "param.dev.user.MONGO", value: "true"}
           - {name: "param.dev.frontend.CATALOGUE_URL", value: "http://dev-catalogue.bhakti-19.net:8080/"}
+          - {name: "param.dev.frontend.USER_URL", value: "http://dev-user.bhakti-19.net:8080/"}
+          - {name: "param.dev.frontend.CART_URL", value: "http://dev-cart.bhakti-19.net:8080/"}
+          - {name: "param.dev.frontend.SHIPPING_URL", value: "http://dev-shipping.bhakti-19.net:8080/"}
+          - {name: "param.dev.frontend.PAYMENT_URL", value: "http://dev-payment.bhakti-19.net:8080/"}
 
 
 
