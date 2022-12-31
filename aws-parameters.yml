@@ -8,6 +8,8 @@
         region: "us-east-1"
       loop:
           - {name: "param.dev.catalogue.MONGO", value: "true"}
+          - {name: "param.dev.user.MONGO", value: "true"}
+          - {name: "param.dev.frontend.CATALOGUE", value: "dev-catalogue.bhakti-19.net"}
 
 
 
