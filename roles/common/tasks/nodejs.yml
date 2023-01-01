@@ -15,6 +15,13 @@
   community.general.npm:
     path: "{{ APP_LOC }}"
 
+- name: Load Schema
+  when: LOAD_SCHEMA
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: "{{DBTYPE}}"
+
+
 - name: Systemd Tasks
   ansible.builtin.include_role:
     name: common

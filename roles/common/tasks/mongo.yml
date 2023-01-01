@@ -1,0 +1,15 @@
+- name: Copy MongoDB YUM repo file
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install MongoDB
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+- name: Load Schema
+  community.mongodb.mongodb_shell:
+    login_host: "{{ lookup('aws_ssm', 'param.{{ENV}}.catalogue.MONGO_ENDPOINT', region='us-east-1') }}"
+    file: "{{APP_LOC}}/schema/{{COMPONENT}}.js"
+    idempotent: yes
