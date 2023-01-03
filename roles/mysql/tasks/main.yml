@@ -3,7 +3,21 @@
   ansible.builtin.set_fact:
     ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.mysql.ROOT_PASSWORD', region='us-east-1') }}"
 
-- name: Checking Variables
-  ansible.builtin.fail:
-     msg: expecting root password input
-     when: ROOT_PASSWORD == ""
+- name: Copy MySql RepoFile
+  ansible.builtin.copy:
+    src: mysql.repo
+    dst: /etc/yum.repos.d/mysql.repo
+
+- name: Disable MySql 8 Version Repo
+  ansible.builtin.shell: dnf module disable mysql
+
+- name: Install MySql Server
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: installed
+
+- name: Start MySql Server
+  ansible.builtin.systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
