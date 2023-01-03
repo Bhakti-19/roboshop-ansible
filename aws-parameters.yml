@@ -16,7 +16,10 @@
           - {name: "param.dev.frontend.CART_URL", value: "http://dev-cart.bhakti-19.net:8080/"}
           - {name: "param.dev.frontend.SHIPPING_URL", value: "http://dev-shipping.bhakti-19.net:8080/"}
           - {name: "param.dev.frontend.PAYMENT_URL", value: "http://dev-payment.bhakti-19.net:8080/"}
-
+          - {name: "param.dev.user.MONGO", value: "true"}
+          - {name: "param.dev.user.MONGO_ENDPOINT", value: "http://dev-mongodb.bhakti-19.net"}
+          - {name: "param.dev.user.MONGO_URL", value: "mongodb://dev-mongodb.bhakti-19.net:27017/users"}
+          - {name: "param.dev.user.REDIS_HOST", value: "dev-redis.bhakti-19.net"}
 
 
 
