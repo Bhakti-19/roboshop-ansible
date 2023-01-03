@@ -23,6 +23,7 @@
           - {name: "param.dev.cart.REDIS_HOST", value: "dev-redis.bhakti-19.net"}
           - { name: "param.dev.cart.CATALOGUE_HOST", value: "dev-catalogue.bhakti-19.net" }
           - {name: "param.dev.cart.CATALOGUE_PORT", value: "8080"}
+          - {name: "param.dev.mysql.ROOT_PASSWORD", value: "8080"}
 
 
 

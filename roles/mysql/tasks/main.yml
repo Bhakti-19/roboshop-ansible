@@ -1,0 +1,9 @@
+
+- name: Get Root Password From Parameter Store
+  ansible.builtin.set_fact:
+    ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.catalogue.MONGO_URL', region='us-east-1') }}"
+
+- name: Checking Variables
+  ansible.builtin.fail:
+     msg: expecting root password input
+     when: ROOT_PASSWORD == ""
