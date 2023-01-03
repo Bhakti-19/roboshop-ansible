@@ -9,11 +9,13 @@
     dst: /etc/yum.repos.d/mysql.repo
 
 - name: Disable MySql 8 Version Repo
-  ansible.builtin.shell: dnf module disable mysql
+  ansible.builtin.shell: dnf module disable mysql -y
 
 - name: Install MySql Server
   ansible.builtin.yum:
-    name: mysql-community-server
+    name:
+    - mysql-community-server
+    - python3-PyMySQL
     state: installed
 
 - name: Start MySql Server
@@ -21,3 +23,17 @@
     name: mysqld
     state: restarted
     enabled: yes
+
+- name: get MySql Version
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: "{{ROOT_PASSWORD}}"
+    filter: version
+    ignore_errors: yes
+    register: out
+
+- name: debug
+  debug:
+    msg: "{{out}}"
+
+
