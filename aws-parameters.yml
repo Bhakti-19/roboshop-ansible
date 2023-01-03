@@ -20,6 +20,10 @@
           - {name: "param.dev.user.MONGO_ENDPOINT", value: "http://dev-mongodb.bhakti-19.net"}
           - {name: "param.dev.user.MONGO_URL", value: "mongodb://dev-mongodb.bhakti-19.net:27017/users"}
           - {name: "param.dev.user.REDIS_HOST", value: "dev-redis.bhakti-19.net"}
+          - {name: "param.dev.cart.REDIS_HOST", value: "dev-redis.bhakti-19.net"}
+          - { name: "param.dev.cart.CATALOGUE_HOST", value: "dev-catalogue.bhakti-19.net" }
+          - {name: "param.dev.cart.CATALOGUE_PORT", value: "8080"}
+
 
 
 
