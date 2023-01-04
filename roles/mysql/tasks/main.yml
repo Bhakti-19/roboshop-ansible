@@ -37,7 +37,7 @@
 #    msg: "{{out}}"
 - name: Change Default Password
   when: out.failed
-  ansible.builtin.block:
+  block:
     - name: Copy Root Rest Password File
       ansible.builtin.template:
         src: root-pass.sql
@@ -51,3 +51,17 @@
     - name: Change Default Password
       ansible.builtin.shell: cat /tmp/root-pass.sql | mysql --connect-expired-password -uroot -p"{{ mysql_log['content'] | b64decode | regex_findall('temporary password.*') | join(' ') | split(' ') | last }}"
 
+- name: Get Plugin List
+  community.mysql.mysql_query:
+    login_user: root
+    login_password: "{{ROOT_PASSWORD}}"
+    query: show plugins
+    ignore_errors: yes
+    register: out
+
+- name: Remove Validate Plugin Password
+  community.mysql.mysql_query:
+    login_user: root
+    login_password: "{{ROOT_PASSWORD}}"
+    query: uninstall plugin validate_password
+    when: out | regex_findall('validate_password') | length > 0
