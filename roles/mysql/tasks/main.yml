@@ -1,39 +1,52 @@
-
-- name: Get Root Password From Parameter Store
-  ansible.builtin.set_fact:
-    ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.mysql.ROOT_PASSWORD', region='us-east-1') }}"
-
-- name: Copy MySql RepoFile
-  ansible.builtin.copy:
-    src: mysql.repo
-    dst: /etc/yum.repos.d/mysql.repo
-
-- name: Disable MySql 8 Version Repo
-  ansible.builtin.shell: dnf module disable mysql -y
-
-- name: Install MySql Server
-  ansible.builtin.yum:
-    name:
-    - mysql-community-server
-    - python3-PyMySQL
-    state: installed
-
-- name: Start MySql Server
-  ansible.builtin.systemd:
-    name: mysqld
-    state: restarted
-    enabled: yes
-
-- name: get MySql Version
-  community.mysql.mysql_info:
-    login_user: root
-    login_password: "{{ROOT_PASSWORD}}"
-    filter: version
-    ignore_errors: yes
+#
+#- name: Get Root Password From Parameter Store
+#  ansible.builtin.set_fact:
+#    ROOT_PASSWORD: "{{ lookup('aws_ssm', 'param.{{ENV}}.mysql.ROOT_PASSWORD', region='us-east-1') }}"
+#
+#- name: Copy MySql RepoFile
+#  ansible.builtin.copy:
+#    src: mysql.repo
+#    dst: /etc/yum.repos.d/mysql.repo
+#
+#- name: Disable MySql 8 Version Repo
+#  ansible.builtin.shell: dnf module disable mysql -y
+#
+#- name: Install MySql Server
+#  ansible.builtin.yum:
+#    name:
+#    - mysql-community-server
+#    - python3-PyMySQL
+#    state: installed
+#
+#- name: Start MySql Server
+#  ansible.builtin.systemd:
+#    name: mysqld
+#    state: restarted
+#    enabled: yes
+#
+#- name: get MySql Version
+#  community.mysql.mysql_info:
+#    login_user: root
+#    login_password: "{{ROOT_PASSWORD}}"
+#    filter: version
+#    ignore_errors: yes
+#    register: out
+#
+##- name: debug
+##  debug:
+##    msg: "{{out}}"
+#
+#- name: Copy Root Rest Password File
+#  ansible.builtin.template:
+#    src: root-pass.sql
+#    dest: /tmp/root-pass.sql
+#
+#
+- name: Load MySQL Log File
+  ansible.builtin.slurp:
+    src: /var/log/mysqld.log
     register: out
 
-- name: debug
+- name: Print
   debug:
-    msg: "{{out}}"
-
-
+      msg: "{{out['content'] | b64decode}}"
