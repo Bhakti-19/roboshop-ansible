@@ -2,6 +2,7 @@
   when: APP_USER is defined
   ansible.builtin.user:
     name: "{{ APP_USER }}"
+  register: appuser
 
 - name: Remove Previous Version Of App
   ansible.builtin.file:

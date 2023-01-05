@@ -1,0 +1,36 @@
+
+- name: Install Python
+  ansible.builtin.yum:
+     name:
+       - python36
+       - gcc
+       - python3-devel
+     state: installed
+
+- name: Include DownLoad APP_CODE Tasks from Common Role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download-app-code
+
+- name: Install Python Dependencies
+  ansible.builtin.pip:
+    requirements: /home/roboshop/{{COMPONENT}}/requirement.txt
+    executable: pip3
+
+- name: Update Application Parameter File -User ID
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regex: 'uid'
+    line: uid = {{appuser.uid}}
+
+- name: Update Application Parameter File - Group Id
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regex: 'gid'
+    line: uid = {{appuser.group}}
+
+
+- name: Systemd Tasks
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
