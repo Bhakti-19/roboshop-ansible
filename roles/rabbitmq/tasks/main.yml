@@ -23,7 +23,7 @@
     password: "{{ lookup('aws_ssm', 'param.{{ENV}}.payment.AMQP_PASS', region='us-east-1') }}"
     vhost: /
     configure_priv: .*
-    read_prive: .*
+    read_priv: .*
     write_priv: .*
     state: present
     tags: administrator
