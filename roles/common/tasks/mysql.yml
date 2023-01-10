@@ -1,5 +1,3 @@
-
-
 - name: Install MySQL Client
   ansible.builtin.yum:
     name:
