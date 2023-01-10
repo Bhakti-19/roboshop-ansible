@@ -1,4 +1,4 @@
-GRANT ALL PRIVILAGES ON *.* 'root'@'%' IDENTIFIED BY '${{ROOT_PASSWORD}}';
+GRANT ALL PRIVILAGES ON *.* TO 'root'@'%' IDENTIFIED BY '{{ROOT_PASSWORD}}';
 
 create database cities if not exists cities;
 GRANT ALL On cities.* TO 'shipping'@'%' IDENTIFIED BY 'secret';
